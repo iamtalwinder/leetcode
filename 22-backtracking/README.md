@@ -14,3 +14,6 @@ e.g:
 
 1) Board problem (word search):
 - keep tack of visited nodes
+
+2) In case maintaining a array path
+- always create copy and push in result array
