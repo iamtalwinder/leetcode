@@ -17,3 +17,7 @@ e.g:
 
 2) In case maintaining a array path
 - always create copy and push in result array
+
+3) In case of finding unique combination
+  - sort the array
+  - use condition `if (i > index && arr[i] === arr[i - 1]) {}` inside loop. 
