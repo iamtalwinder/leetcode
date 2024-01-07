@@ -21,3 +21,6 @@ e.g:
 3) In case of finding unique combination
   - sort the array
   - use condition `if (i > index && arr[i] === arr[i - 1]) {}` inside loop. 
+
+4) for unique permutaion
+  - use condition `if (i > 0 && nums[i] === nums[i - 1] && visited[i - 1]) {}`
