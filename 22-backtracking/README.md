@@ -24,3 +24,9 @@ e.g:
 
 4) for unique permutaion
   - use condition `if (i > 0 && nums[i] === nums[i - 1] && visited[i - 1]) {}`
+
+5) Don't use loop inside recursion
+  - when problem involve binary choice
+
+6) Use loop inside recursion
+  - when need to generate combinations like subsets and permutations

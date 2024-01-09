@@ -18,3 +18,8 @@ var subsets = function(nums) {
   generateSubsets([], 0);
   return result;
 };
+
+/*
+Time complexity: O(2^n)
+Space complexity: O(2^n)
+*/
