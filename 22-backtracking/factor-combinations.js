@@ -11,7 +11,7 @@ var factorCombinations = function(num) {
       return;
     }
 
-    for (let i = start; i < num; i++) {
+    for (let i = start; i * i <= target; i++) {
       const newTarget = target / i;
       if (newTarget >= 0 && newTarget % 1 === 0) {
         path.push(i);
@@ -24,5 +24,3 @@ var factorCombinations = function(num) {
   backtrack([], num, 2);
   return result;
 };
-
-console.log(factorCombinations(8));
