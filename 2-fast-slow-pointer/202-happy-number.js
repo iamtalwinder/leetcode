@@ -3,25 +3,23 @@
  * @return {boolean}
  */
 var isHappy = function(n) {
-  function nextGreaterNumber(n) {
+  function getNext(n) {
       let sum = 0;
       while (n > 0) {
           const digit = n % 10;
           sum += digit * digit;
           n = Math.floor(n / 10);
       }
-
       return sum;
   }
 
-  let fast = n, slow = n;
+  let slow = n;
+  let fast = getNext(n);
 
-  do {
-      fast = nextGreaterNumber(nextGreaterNumber(fast));
-      slow = nextGreaterNumber(slow);
+  while (fast !== 1 && slow !== fast) {
+      slow = getNext(slow);
+      fast = getNext(getNext(fast));
+  }
 
-      if (fast === 1) return true;
-  } while (fast !== slow);
-
-  return slow === 1;
+  return fast === 1;
 };
