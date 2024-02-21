@@ -2,38 +2,41 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-var circularArrayLoop = function(nums) {
-  function nextIndex(currentIndex) {
-      return (currentIndex + nums[currentIndex] + nums.length) % nums.length;
-  }
-
+var circularArrayLoop = function (nums) {
   for (let i = 0; i < nums.length; i++) {
-      if (nums[i] === 0) {
-          continue;
+    if (nums[i] === 0) continue;
+
+    let slow = i;
+    let fast = nextIndex(nums, i);
+
+    while (
+      nums[slow] * nums[fast] > 0 &&
+      nums[slow] * nums[nextIndex(nums, fast)] > 0
+    ) {
+      if (slow === fast) {
+        if (slow === nextIndex(nums, slow)) {
+          break;
+        }
+        return true;
       }
 
-      let slow = i,
-          fast = nextIndex(i);
+      slow = nextIndex(nums, slow);
+      fast = nextIndex(nums, nextIndex(nums, fast));
+    }
 
-      while (nums[slow] * nums[fast] > 0 && nums[slow] * nums[nextIndex(fast)] > 0) {
-          if (slow === fast) {
-              console.log(slow, fast)
-              if (slow === nextIndex(slow)) {
-                  break; 
-              }
-              return true;
-          }
+    slow = i;
+    while (nums[slow] * nums[i] > 0) {
+      const next = nextIndex(nums, slow);
+      nums[slow] = 0;
+      slow = next;
+    }
 
-          slow = nextIndex(slow);
-          fast = nextIndex(nextIndex(fast));
-      }
-
-      let j = i;
-      while (nums[j] * nums[nextIndex(j)] > 0) {
-          nums[j] = 0;
-          j = nextIndex(j);
-      }
   }
 
   return false;
 };
+
+function nextIndex(nums, index) {
+  const length = nums.length;
+  return ((index + nums[index]) % length + length) % length
+}
