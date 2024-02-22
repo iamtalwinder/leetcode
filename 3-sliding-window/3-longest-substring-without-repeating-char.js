@@ -2,24 +2,25 @@
  * @param {string} s
  * @return {number}
  */
-var lengthOfLongestSubstring = function(s) {    
-  let maxLength = 0, start = 0;
-  let windowChar = new Map();
+var lengthOfLongestSubstring = function (s) {
+  let maxLength = 0, start = 0, end = 0;
 
-  for (let end = 0; end < s.length; end++) {
-      if (windowChar.has(s[end])) {
-          maxLength = Math.max(maxLength, end - start);
-          newStart = windowChar.get(s[end]) + 1;
+  const currentWindow = new Map();
 
-          while (start < newStart) {
-              windowChar.delete(s[start]);
-              start++;
-          }
-      } else if (end === s.length - 1) {
-          maxLength = Math.max(maxLength, end - start + 1);
+  while (start <= end && end < s.length) {
+    if (currentWindow.has(s[end])) {
+      const newStartIndex = currentWindow.get(s[end]) + 1;
+
+      while (start !== newStartIndex) {
+        currentWindow.delete(s[start]);
+        start++;
       }
+    }
 
-      windowChar.set(s[end], end);
+    maxLength = Math.max(maxLength, end - start + 1);
+
+    currentWindow.set(s[end], end);
+    end++;
   }
 
   return maxLength;
