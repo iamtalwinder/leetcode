@@ -47,3 +47,16 @@ var reverse = function (prev, k) {
 
   return current;
 }
+
+/*
+0 -> 1 -> 2 ->    3 -> 4
+prev curr next
+
+2 1 3
+
+curr = next.next
+next.next = curr
+prev.next = next
+
+*/
+
