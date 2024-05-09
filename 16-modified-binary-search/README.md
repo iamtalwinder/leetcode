@@ -18,3 +18,48 @@ def find_position(arr, target):
     return binary_search(arr, target, low, high)
 ```
 
+**Lower Bound**: The function searches for the first position where the element is not less than the target.
+
+arr[mid] >= target
+
+
+```js
+function lowerBound(arr, target) {
+    let low = 0;
+    let high = arr.length;
+
+    while (low < high) {
+        let mid = Math.floor((low + high) / 2);
+        if (arr[mid] >= target) {
+            low = mid + 1;
+        } else {
+            high = mid;
+        }
+    }
+    return low;
+}
+```
+
+
+**Upper Bound**: The function searches for the first position where the element is greater than the target.
+
+arr[mid] > target
+
+
+```js
+function upperBound(arr, target) {
+    let low = 0;
+    let high = arr.length;
+
+    while (low < high) {
+        let mid = Math.floor((low + high) / 2);
+        if (arr[mid] > target) {
+            low = mid + 1;
+        } else {
+            high = mid;
+        }
+    }
+    return low;
+}
+
+```
