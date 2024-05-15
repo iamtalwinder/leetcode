@@ -4,37 +4,40 @@
  * @return {number[]}
  */
 var searchRange = function (nums, target) {
-  return [findLeft(nums, target), findRight(nums, target)]
+  return [lowerBound(nums, target), upperBound(nums, target)]
 };
 
-var findLeft = function (nums, target) {
-  let left = 0, right = nums.length - 1;
+function lowerBound(nums, target) {
 
-  while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
+  let low = 0, high = nums.length - 1;
+
+  while (low < high) {
+    const mid = Math.floor((low + high) / 2);
 
     if (nums[mid] < target) {
-      left = mid + 1;
+      low = mid + 1;
     } else {
-      right = mid - 1;
+      high = mid;
     }
   }
 
-  return left < nums.length && nums[left] === target ? left : -1;
+  return nums[low] === target ? low : -1;
 }
 
-var findRight = function (nums, target) {
-  let left = 0, right = nums.length - 1;
 
-  while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
+function upperBound(nums, target) {
 
-    if (nums[mid] <= target) {
-      left = mid + 1;
+  let low = 0, high = nums.length - 1;
+
+  while (low < high) {
+    const mid = Math.ceil((low + high) / 2);
+
+    if (nums[mid] > target) {
+      high = mid - 1;
     } else {
-      right = mid - 1;
+      low = mid;
     }
   }
 
-  return right >= 0 && nums[right] === target && right < nums.length ? right : -1;
+  return nums[low] === target ? low : -1;
 } 

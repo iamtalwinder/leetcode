@@ -11,21 +11,22 @@
  * @return {number}
  */
 var diameterOfBinaryTree = function (root) {
-  let diameter = 0;
-  function depth(node) {
-    if (!node) {
-      return -1;
-    }
+  let maxDiameter = 0;
 
-    const leftHeight = depth(node.left);
-    const rightHeight = depth(node.right);
+  function dfs(node) {
+      if (!node) {
+          return 0;
+      }
 
-    diameter = Math.max(diameter, leftHeight + rightHeight + 2);
+      const leftDepth = dfs(node.left);
+      const rightDepth = dfs(node.right);
 
-    return Math.max(leftHeight, rightHeight) + 1
+      maxDiameter = Math.max(maxDiameter, leftDepth + rightDepth);
+
+      return Math.max(leftDepth, rightDepth) + 1
   }
 
-  depth(root);
+  dfs(root);
 
-  return diameter;
+  return maxDiameter;
 };
